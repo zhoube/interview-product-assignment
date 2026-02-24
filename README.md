@@ -1,11 +1,21 @@
 # Interview Product Assignment
 
 Mr. Jigar, thank you for taking the time to interview me and for giving me the
-opportunity to submit this assignment after the interview. As discussed during the interview,
-I have developed a simple product website API Backend where users can view multiple products.
-Each product includes `id`, `name`, and `price`. The API exposes three endpoints:
-get all products, get a single product, and create a product. Data is stored in
-memory (no database), and user data/payment API is not required.
+opportunity to submit this assignment after the interview. I spent a reasonable
+amount of time to develop a simple product website API backend where users can
+view multiple products.
+
+As discussed during the interview, here are the key requirements:
+- Each product includes `id`, `name`, and `price`.
+- Three endpoints are required:
+- `GET /api/products` (get all products)
+- `GET /api/products/{id}` (get a single product by ID)
+- `POST /api/products` (create a new product)
+- Data is stored in memory (no database), and user data/payment API is not required.
+
+I did not implement unit tests for this assignment. If I am missing any requirements
+or if you have any questions, please let me know. I am happy to make any necessary
+adjustments.
 
 **Project Overview**
 - Language: Java 17
@@ -14,17 +24,9 @@ memory (no database), and user data/payment API is not required.
 - API style: REST with JSON
 
 **API Endpoints**
-- `GET /api/products`
-  - Response `200 OK`
-  - Returns all products (empty list if none)
-- `GET /api/products/{id}`
-  - Response `200 OK`
-  - Returns a single product
-  - Response `404 Not Found` if the product does not exist
-- `POST /api/products`
-  - Request body: JSON with `name` and `price`
-  - Response `201 Created` with `Location` header
-  - Response `400 Bad Request` for validation errors
+- `GET /api/products` -> `200 OK`, returns all products (empty list if none)
+- `GET /api/products/{id}` -> `200 OK` for success, `404 Not Found` if missing
+- `POST /api/products` -> `201 Created` with `Location` header, `400 Bad Request` for validation errors
 
 **Sample Requests and Responses**
 
@@ -176,7 +178,8 @@ HTTP/1.1 400 Bad Request
 ```
 
 **Run From Prebuilt JAR**
-1. Download the prebuilt JAR (target/Interview_Product_Assignment-0.0.1-SNAPSHOT.jar).
+1. Download the prebuilt JAR.
+`Interview_Product_Assignment-0.0.1-SNAPSHOT.jar`
 2. Run the JAR:
 ```bash
 java -jar Interview_Product_Assignment-0.0.1-SNAPSHOT.jar
@@ -184,13 +187,8 @@ java -jar Interview_Product_Assignment-0.0.1-SNAPSHOT.jar
 3. The API will be available at `http://localhost:8080`.
 
 **Design Patterns Used**
-- Layered Architecture (Controller-Service separation)
-  - Controllers handle HTTP concerns, services handle business logic and storage.
-- Strategy (ProductService interface + ProductServiceImpl implementation)
-  - Allows swapping storage strategies without changing the controller.
-- DTO Pattern (request/response separation)
-  - Keeps API contracts explicit and decoupled from the domain model.
-- Exception Handling pattern via centralized `@RestControllerAdvice`
-  - Consistent JSON error format for all errors.
-- Dependency Injection (Spring IoC)
-  - Spring injects the `ProductService` into the controller, promoting testability and loose coupling.
+- Layered Architecture (Controller-Service separation) keeps HTTP concerns in controllers and business logic in services.
+- Service Abstraction/Strategy-like Pattern (ProductService interface + ProductServiceImpl implementation) so that the controller depends on the ProductService interface instead of a concrete class..
+- DTO Pattern (request/response separation) keeps API contracts explicit and decoupled from the domain model.
+- Exception Handling pattern via centralized `@RestControllerAdvice` provides consistent JSON error responses.
+- Dependency Injection (Spring IoC) injects `ProductService` into the controller for loose coupling and testability.
