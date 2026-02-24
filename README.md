@@ -176,7 +176,7 @@ HTTP/1.1 400 Bad Request
 
 **Run From Prebuilt JAR**
 1. Download the prebuilt JAR.
-`Interview_Product_Assignment-0.0.1-SNAPSHOT.jar`
+`target/Interview_Product_Assignment-0.0.1-SNAPSHOT.jar`
 2. Run the JAR:
 ```bash
 java -jar Interview_Product_Assignment-0.0.1-SNAPSHOT.jar
