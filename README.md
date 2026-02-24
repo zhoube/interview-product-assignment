@@ -26,7 +26,7 @@ adjustments.
 **API Endpoints**
 - `GET /api/products` -> `200 OK`, returns all products (empty list if none)
 - `GET /api/products/{id}` -> `200 OK` for success, `404 Not Found` if missing
-- `POST /api/products` -> `201 Created` with `Location` header, `400 Bad Request` for validation errors
+- `POST /api/products` -> `201 Created`, `400 Bad Request` for validation errors
 
 **Sample Requests and Responses**
 
@@ -44,7 +44,6 @@ POST /api/products
 Response:
 ```
 HTTP/1.1 201 Created
-Location: /api/products/1
 ```
 ```json
 {
@@ -68,7 +67,6 @@ POST /api/products
 Response:
 ```
 HTTP/1.1 201 Created
-Location: /api/products/2
 ```
 ```json
 {
@@ -92,7 +90,6 @@ POST /api/products
 Response:
 ```
 HTTP/1.1 201 Created
-Location: /api/products/3
 ```
 ```json
 {
@@ -188,7 +185,7 @@ java -jar Interview_Product_Assignment-0.0.1-SNAPSHOT.jar
 
 **Design Patterns Used**
 - Layered Architecture (Controller-Service separation) keeps HTTP concerns in controllers and business logic in services.
-- Service Abstraction/Strategy-like Pattern (ProductService interface + ProductServiceImpl implementation) so that the controller depends on the ProductService interface instead of a concrete class..
+- Service Abstraction/Strategy-like Pattern (ProductService interface + ProductServiceImpl implementation) so that the controller depends on the ProductService interface instead of a concrete class.
 - DTO Pattern (request/response separation) keeps API contracts explicit and decoupled from the domain model.
 - Exception Handling pattern via centralized `@RestControllerAdvice` provides consistent JSON error responses.
 - Dependency Injection (Spring IoC) injects `ProductService` into the controller for loose coupling and testability.
